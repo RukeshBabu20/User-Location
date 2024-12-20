@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import * as employeeService from "../services/employee-service";
+import * as courseService from "../services/course-service";
 
 export const createData = async (
   req: Request,
@@ -7,7 +7,7 @@ export const createData = async (
   next: NextFunction
 ) => {
   try {
-    const result = await employeeService.createService(req.body);
+    const result = await courseService.createService(req.body);
     if (result) {
       res.status(200).json(result);
     } else {
@@ -24,7 +24,7 @@ export const showData = async (
   next: NextFunction
 ) => {
   try {
-    const result = await employeeService.showService();
+    const result = await courseService.showService();
     if (result) {
       res.status(200).json(result);
     } else {
@@ -43,7 +43,7 @@ export const showIdData = async (
   const { id } = req.params;
 
   try {
-    const result = await employeeService.showIdService(id);
+    const result = await courseService.showIdService(id);
     console.log(result);
     if (result) {
       res.status(200).json(result);
@@ -62,7 +62,7 @@ export const updateData = async (
 ) => {
   const { id } = req.params;
   try {
-    const result = await employeeService.updateService(id, req.body);
+    const result = await courseService.updateService(id, req.body);
     if (result) {
       res.status(200).json({ message: "Data updated", result });
     } else {
@@ -80,7 +80,7 @@ export const deleteData = async (
 ) => {
   const { id } = req.params;
   try {
-    const result = await employeeService.deleteService(id);
+    const result = await courseService.deleteService(id);
     if (result) {
       res.status(200).json({ message: "data deleted", result });
     } else {

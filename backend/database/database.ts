@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const DB_URI = "mongodb://127.0.0.1:27017/emp";
+const DB_URI = "mongodb://127.0.0.1:27017/location";
 
 const dbConnnection = () => {
   mongoose
