@@ -91,7 +91,7 @@ export const courseslist = async (
     const user = await authService.findUser(email);
     const userLat = parseFloat(user?.latitude as any);
     const userLong = parseFloat(user?.longitude as any);
-    const radius = 10;
+    const radius = 12;
 
     const result = await showService();
     console.log(result);
@@ -110,5 +110,30 @@ export const courseslist = async (
   } catch (error) {
     console.error("Error creating user:", error);
     res.status(500).json({ message: "Failed to create user", error: error });
+  }
+};
+
+export const getUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const token = req.header("Authorization")?.split(" ")[1];
+
+    if (!token) {
+      res.status(403).json({ message: "Access denied" });
+    }
+
+    const secret = (process.env.JWT_SECRET as string) || "nodeauthsecret";
+    const decoded = jwt.verify(token as any, secret);
+    const { email } = decoded as any;
+    const user = await authService.findUser(email);
+
+    const result = await authService.showUser(user?.id);
+
+    res.status(200).json({ data: result });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to delete user" });
   }
 };

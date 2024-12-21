@@ -32,3 +32,7 @@ export const findUser = async (email: string) => {
 export const deleteUser = async (email: string) => {
   return await authModel.deleteOne({ email });
 };
+
+export const showUser = async (id: string) => {
+  return await authModel.findById(id);
+};
