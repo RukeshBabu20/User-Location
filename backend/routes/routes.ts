@@ -17,5 +17,6 @@ router.delete("/courses/:id", verifyToken, courseController.deleteData);
 router.post("/register", uploads, authController.register);
 router.post("/users", authController.login);
 router.delete("/users/:email", authController.deleteUser);
+router.get("/users", verifyToken, authController.courseslist);
 
 export default router;
